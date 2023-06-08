@@ -17,12 +17,12 @@ import Login from "./pages/Login";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <Login />,
     errorElement: <NotFound />,
   },
   {
-    path: "login",
-    element: <Login />,
+    path: "home",
+    element: <Home />,
   },
   {
     path: "todos/:todoId",
