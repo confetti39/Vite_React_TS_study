@@ -1,5 +1,11 @@
 import React from "react";
+import LoginUserInfo from "../components/LoginUserInfo";
 
 export default function Home() {
-  return <div>Home</div>;
+  return (
+    <div>
+      <LoginUserInfo />
+      Home
+    </div>
+  );
 }

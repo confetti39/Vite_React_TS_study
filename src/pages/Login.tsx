@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "@mui/material/Button";
 import { TextField } from "@mui/material";
 import { useRecoilState } from "recoil";
@@ -9,16 +9,24 @@ export default function Login() {
   const navigate = useNavigate();
   const [id, setId] = useRecoilState(userId);
   const [password, setPassword] = useRecoilState(userPassword);
-  const handleLogin = () => {
+  const handleLogIn = () => {
     if (!(id && password)) return;
     navigate(`/home`);
+    localStorage.setItem("id", id);
   };
+
+  useEffect(() => {
+    const id = localStorage.getItem("id");
+    if (id) {
+      setId(id);
+      navigate(`/home`);
+    }
+  }, []);
 
   return (
     <>
       <div>
         <TextField
-          id="outlined-basic"
           label="아이디"
           variant="outlined"
           onChange={(
@@ -28,7 +36,6 @@ export default function Login() {
           }}
         />
         <TextField
-          id="outlined-basic"
           label="비밀번호"
           variant="outlined"
           type="password"
@@ -38,7 +45,7 @@ export default function Login() {
             setPassword(e.target.value);
           }}
         />
-        <Button variant="contained" onClick={handleLogin}>
+        <Button variant="contained" onClick={handleLogIn}>
           로그인
         </Button>
       </div>
