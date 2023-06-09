@@ -1,6 +1,6 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
 
-const initialTodoData = {
+export const initialTodoData = {
   todos: [
     {
       id: 0,
