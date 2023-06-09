@@ -19,6 +19,10 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
+    path: "home/:pageCount",
+    element: <Home />,
+  },
+  {
     path: "todos/:todoId",
     element: <Detail />,
   },

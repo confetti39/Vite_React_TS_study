@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import { pageNumber, todoData } from "../states/TodoData";
 import Todo from "./Todo";
 import PaginationCOMP from "./PaginationCOMP";
 
 export default function TodoList() {
+  const navigate = useNavigate();
   const [todos, setTodos] = useRecoilState(todoData);
   const [pageCount, setPageCount] = useRecoilState(pageNumber);
   const countPerPage = 30;
@@ -24,6 +26,7 @@ export default function TodoList() {
 
   useEffect(() => {
     getTodos();
+    navigate(`/home/${pageCount}`);
   }, [pageCount]);
 
   return (
