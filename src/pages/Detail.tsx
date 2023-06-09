@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GetSingleTodo, initialTodoData } from "../states/TodoData";
+import LoginUserInfo from "../components/LoginUserInfo";
+import DetailButtons from "../components/DetailButtons";
 
 export default function Detail() {
   const { todoId } = useParams();
@@ -17,12 +19,11 @@ export default function Detail() {
   }, []);
   // todo?.todo, todo?.completed
 
-  return <div>{todo.todo}</div>;
+  return (
+    <div>
+      <LoginUserInfo />
+      <h1>{todo.todo}</h1>
+      <DetailButtons todoId={todoId} />
+    </div>
+  );
 }
-
-// {
-//     id: 1,
-//     todo: "",
-//     completed: false,
-//     userId: 1,
-//   }
