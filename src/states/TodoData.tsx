@@ -38,3 +38,8 @@ export const todoData = atom<GetAllTodo>({
   key: "todoData",
   default: initialTodoData,
 });
+
+export const pageNumber = atom<number>({
+  key: "pageNumber",
+  default: 1,
+});
