@@ -5,6 +5,9 @@ import { GetSingleTodo, initialTodoData, singleTodo } from "../states/TodoData";
 import LoginUserInfo from "../components/LoginUserInfo";
 import DetailButtons from "../components/DetailButtons";
 import { useRecoilState } from "recoil";
+import styles from "./styles/Detail.module.css";
+import Header from "../components/Header";
+import Todo from "../components/Todo";
 
 export default function Detail() {
   const { todoId } = useParams();
@@ -21,9 +24,12 @@ export default function Detail() {
   // todo?.todo, todo?.completed
 
   return (
-    <div>
-      <LoginUserInfo />
-      <h1>{todo.todo}</h1>
+    <div className={styles.container}>
+      <div className={styles.button}>
+        <LoginUserInfo />
+      </div>
+      <Header />
+      <Todo todo={todo} />
       <DetailButtons todoId={todoId} />
     </div>
   );

@@ -1,10 +1,12 @@
 import React from "react";
-import LoginUserInfo from "./LoginUserInfo";
+import styles from "./styles/Header.module.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
+  const navigate = useNavigate();
   return (
-    <>
-      <LoginUserInfo />
-    </>
+    <header className={styles.header} onClick={() => navigate(`/`)}>
+      TODO LIST
+    </header>
   );
 }

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { pageNumber, todoData } from "../states/TodoData";
 import Todo from "./Todo";
 import PaginationCOMP from "./PaginationCOMP";
+import styles from "./styles/TodoList.module.css";
 
 export default function TodoList() {
   const navigate = useNavigate();
@@ -30,11 +31,13 @@ export default function TodoList() {
   }, [pageCount]);
 
   return (
-    <div>
+    <div className={styles.todoList}>
       {todos.todos.map((todo) => {
         return <Todo key={todo.id} todo={todo} />;
       })}
-      <PaginationCOMP total={todos.total} countPerPage={countPerPage} />
+      <div className={styles.pagination}>
+        <PaginationCOMP total={todos.total} countPerPage={countPerPage} />
+      </div>
     </div>
   );
 }

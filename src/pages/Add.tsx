@@ -1,11 +1,14 @@
 import React from "react";
 import LoginUserInfo from "../components/LoginUserInfo";
 import TodoInput from "../components/TodoInput";
+import styles from "./styles/Add.module.css";
 
 export default function Add() {
   return (
     <>
-      <LoginUserInfo />
+      <div className={styles.button}>
+        <LoginUserInfo />
+      </div>
       <TodoInput type="add" todoId={undefined} />
     </>
   );
