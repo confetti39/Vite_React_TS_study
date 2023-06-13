@@ -14,24 +14,27 @@ export default function TodoInput({
   const handleSubmit = (): void => {
     switch (type) {
       case "edit":
-        axios.put(`https://dummyjson.com/todos/${todoId}`, {
-          headers: { "Content-Type": "application/json" },
-          data: JSON.stringify({
+        axios.put(
+          `https://dummyjson.com/todos/${todoId}`,
+          {
             todo: text,
-          }),
-        });
+          },
+          { headers: { "Content-Type": "application/json" } }
+        );
         break;
 
       case "add":
-        fetch("https://dummyjson.com/todos/add", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
+        axios.post(
+          `https://dummyjson.com/todos/add`,
+          {
             todo: text,
             completed: false,
             userId: 5,
-          }),
-        });
+          },
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        );
         break;
     }
   };

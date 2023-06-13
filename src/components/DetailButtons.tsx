@@ -22,11 +22,11 @@ export default function DetailButtons({
   };
   return (
     <>
-      <IconButton onClick={handleDelete} aria-label="delete" size="large">
-        <DeleteIcon fontSize="inherit" />
-      </IconButton>
       <IconButton onClick={handleEdit} aria-label="delete" size="large">
         <EditIcon fontSize="inherit" />
+      </IconButton>
+      <IconButton onClick={handleDelete} aria-label="delete" size="large">
+        <DeleteIcon fontSize="inherit" />
       </IconButton>
       {isOpenInput ? <TodoInput type={"edit"} todoId={todoId} /> : null}
     </>

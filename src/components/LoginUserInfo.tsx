@@ -15,7 +15,8 @@ export default function LoginUserInfo() {
 
   return (
     <div>
-      {id}
+      <header onClick={() => navigate(`/`)}>TODO LIST</header>
+      {id}님 환영합니다.
       <Button variant="contained" onClick={handleLogOut}>
         로그아웃
       </Button>
