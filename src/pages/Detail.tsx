@@ -1,13 +1,14 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { GetSingleTodo, initialTodoData } from "../states/TodoData";
+import { GetSingleTodo, initialTodoData, singleTodo } from "../states/TodoData";
 import LoginUserInfo from "../components/LoginUserInfo";
 import DetailButtons from "../components/DetailButtons";
+import { useRecoilState } from "recoil";
 
 export default function Detail() {
   const { todoId } = useParams();
-  const [todo, setTodo] = useState<GetSingleTodo>(initialTodoData.todos[0]);
+  const [todo, setTodo] = useRecoilState(singleTodo);
   const getTodo = async () => {
     await axios
       .get(`https://dummyjson.com/todos/${todoId}`)

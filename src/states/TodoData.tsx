@@ -34,6 +34,11 @@ export type UpdateTodo = {
 
 export type PostNewTodo = Omit<GetSingleTodo, "id">;
 
+export const singleTodo = atom<GetSingleTodo>({
+  key: "singleTodo",
+  default: initialTodoData.todos[0],
+});
+
 export const todoData = atom<GetAllTodo>({
   key: "todoData",
   default: initialTodoData,

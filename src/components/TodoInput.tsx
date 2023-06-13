@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import axios from "axios";
+import { useRecoilState } from "recoil";
+import { singleTodo } from "../states/TodoData";
 
 export default function TodoInput({
   type,
@@ -11,16 +13,20 @@ export default function TodoInput({
   todoId: string | undefined;
 }) {
   const [text, setText] = useState<string>("");
+  const [todo, setTodo] = useRecoilState(singleTodo);
   const handleSubmit = (): void => {
     switch (type) {
       case "edit":
-        axios.put(
-          `https://dummyjson.com/todos/${todoId}`,
-          {
-            todo: text,
-          },
-          { headers: { "Content-Type": "application/json" } }
-        );
+        axios
+          .put(
+            `https://dummyjson.com/todos/${todoId}`,
+            {
+              todo: text,
+            },
+            { headers: { "Content-Type": "application/json" } }
+          )
+          .then((res) => setTodo(res.data));
+
         break;
 
       case "add":
