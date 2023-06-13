@@ -29,8 +29,10 @@ export default function Detail() {
         <LoginUserInfo />
       </div>
       <Header />
-      <Todo todo={todo} />
-      <DetailButtons todoId={todoId} />
+      <div className={styles.todo}>
+        <Todo todo={todo} />
+        <DetailButtons todoId={todoId} />
+      </div>
     </div>
   );
 }

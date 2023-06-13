@@ -1,11 +1,16 @@
 .button {
   position: fixed;
-  right: 20px;
-  top: 20px;
+  right: 1.5rem;
+  top: 1.5rem;
 }
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.todo {
+  display: flex;
+  flex-direction: row;
 }

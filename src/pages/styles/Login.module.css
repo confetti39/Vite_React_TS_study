@@ -1,13 +1,18 @@
-.loginInfo {
-  position: fixed;
-  right: 1.5rem;
-  top: 1.5rem;
-}
-
-.input {
+.loginBox {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 50rem;
+}
+
+.id {
+  margin-bottom: 1rem;
+}
+
+.password {
+  margin-bottom: 1rem;
+}
+
+.button {
 }
