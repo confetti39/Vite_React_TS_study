@@ -1,6 +1,6 @@
 import React from "react";
 import Pagination from "@mui/material/Pagination";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 
 import { pageNumber } from "../states/TodoData";
 
@@ -11,7 +11,7 @@ export default function PaginationCOMP({
   total: number;
   countPerPage: number;
 }) {
-  const [pageCount, setPageCount] = useRecoilState(pageNumber);
+  const setPageCount = useSetRecoilState(pageNumber);
   return (
     <div>
       <Pagination
