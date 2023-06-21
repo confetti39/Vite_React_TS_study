@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Button from "@mui/material/Button";
 import {
-  Avatar,
   Box,
   Checkbox,
   Container,
@@ -9,14 +8,11 @@ import {
   Grid,
   Link,
   TextField,
-  Typography,
 } from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { userId, userPassword } from "../states/User";
 import Header from "../components/Header";
-import styles from "./styles/Login.module.css";
 
 export default function Login() {
   const navigate = useNavigate();
