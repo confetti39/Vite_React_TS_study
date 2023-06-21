@@ -1,6 +1,17 @@
 import React, { useEffect } from "react";
 import Button from "@mui/material/Button";
-import { TextField } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Checkbox,
+  Container,
+  FormControlLabel,
+  Grid,
+  Link,
+  TextField,
+  Typography,
+} from "@mui/material";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { userId, userPassword } from "../states/User";
@@ -31,26 +42,44 @@ export default function Login() {
   }, []);
 
   return (
-    <div className={styles.loginBox}>
-      <Header />
-      <div className={styles.id}>
+    <Container component="main" maxWidth="xs">
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography> */}
+        <Header />
         <TextField
-          label="아이디"
-          variant="outlined"
-          sx={{ width: 500 }}
+          name="email"
+          label="Email Address"
+          required
+          fullWidth
+          autoComplete="email"
+          autoFocus
+          margin="normal"
           onChange={(
             e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
           ) => {
             setId(e.target.value);
           }}
         />
-      </div>
-      <div className={styles.password}>
         <TextField
-          label="비밀번호"
-          variant="outlined"
+          name="password"
+          label="Password"
           type="password"
-          sx={{ width: 500 }}
+          required
+          fullWidth
+          autoComplete="current-password"
+          margin="normal"
           onChange={(
             e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
           ) => {
@@ -58,12 +87,28 @@ export default function Login() {
           }}
           onKeyDown={handleKeyDown}
         />
-      </div>
-      <div className={styles.button}>
-        <Button variant="contained" onClick={handleLogIn} sx={{ width: 500 }}>
-          로그인
+        <FormControlLabel
+          label="Remember me"
+          control={<Checkbox value="remember" color="primary" />}
+        />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+          onClick={handleLogIn}
+        >
+          Sign in
         </Button>
-      </div>
-    </div>
+        <Grid container>
+          <Grid item xs>
+            <Link>Forgot Password?</Link>
+          </Grid>
+          <Grid item>
+            <Link>Sign Up</Link>
+          </Grid>
+        </Grid>
+      </Box>
+    </Container>
   );
 }
