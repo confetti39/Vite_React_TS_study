@@ -1,21 +1,18 @@
 import axios from "axios";
-import { useRecoilState } from "recoil";
-import { pageNumber, todoData } from "../states/TodoData";
+import { useState } from "react";
 
-const baseUrl = `https://dummyjson.com/todos`;
-
-export function useAxiosGet(countPerPage: number) {
-  const [todos, setTodos] = useRecoilState(todoData);
-  const [pageCount, setPageCount] = useRecoilState(pageNumber);
+export default function useAxiosGet<TResponse>(
+  url: string,
+  initialData: TResponse | null = null
+): {
+  fetchData: () => Promise<void>;
+  data: TResponse | null;
+} {
+  const [data, setData] = useState<TResponse | null>(initialData);
 
   const fetchData = async (): Promise<void> => {
-    await axios
-      .get(
-        baseUrl +
-          `?limit=${countPerPage}&skip=${(pageCount - 1) * countPerPage}`
-      )
-      .then((res) => setTodos(res.data));
+    await axios.get(url).then((res) => setData(res.data));
   };
 
-  return { fetchData, todos, pageCount };
+  return { fetchData, data };
 }

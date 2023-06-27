@@ -6,22 +6,22 @@ import { Checkbox } from "@mui/material";
 import axios from "axios";
 import { useRecoilState } from "recoil";
 
-export default function Todo({ todo }: { todo: GetSingleTodo }) {
+export default function Todo({ todo }: { todo: GetSingleTodo | null }) {
   const navigate = useNavigate();
   const [fetchTodos, setFetchTodos] = useRecoilState(todoData);
   const handleUpdate = async (): Promise<void> => {
     await axios
       .put(
-        `https://dummyjson.com/todos/${todo.id}`,
+        `https://dummyjson.com/todos/${todo?.id}`,
         {
-          completed: !todo.completed,
+          completed: !todo?.completed,
         },
         { headers: { "Content-Type": "application/json" } }
       )
       .then((res) => {
         let array: GetAllTodo = { ...fetchTodos };
         let index: number = array.todos.findIndex(
-          (item) => item.id === todo.id
+          (item) => item.id === todo?.id
         );
 
         array.todos[index].completed = res.data.completed;
@@ -32,16 +32,16 @@ export default function Todo({ todo }: { todo: GetSingleTodo }) {
   return (
     <div className={styles.todo}>
       <Checkbox
-        checked={todo.completed !== undefined ? todo.completed : false}
+        checked={todo?.completed !== undefined ? todo.completed : false}
         onChange={handleUpdate}
       />
       <span
         className={`${styles.todoContent} ${
-          todo.completed ? styles.checked : ""
+          todo?.completed ? styles.checked : ""
         }`}
-        onClick={(): void => navigate(`/todos/${todo.id}`)}
+        onClick={(): void => navigate(`/todos/${todo?.id}`)}
       >
-        {todo.todo ? todo.todo : ""}
+        {todo?.todo ? todo.todo : ""}
       </span>
     </div>
   );

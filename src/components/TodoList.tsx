@@ -1,19 +1,22 @@
-import React, { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import axios from "axios";
+import { useEffect } from "react";
+import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
 
-import { pageNumber, todoData } from "../states/TodoData";
+import { GetAllTodo, pageNumber } from "../states/TodoData";
 import Todo from "./Todo";
 import PaginationCOMP from "./PaginationCOMP";
 import styles from "./styles/TodoList.module.css";
-import { useAxiosGet } from "../hooks/useAxiosGet";
+import useAxiosGet from "../hooks/useAxiosGet";
 
 export default function TodoList() {
   const navigate = useNavigate();
+  const pageCount = useRecoilValue(pageNumber);
+  const countPerPage: number = 30;
 
-  const countPerPage = 30;
-  const { fetchData: getTodos, todos, pageCount } = useAxiosGet(countPerPage);
+  const url: string = `https://dummyjson.com/todos?limit=${countPerPage}&skip=${
+    (pageCount - 1) * countPerPage
+  }`;
+  const { fetchData: getTodos, data: todos } = useAxiosGet<GetAllTodo>(url);
 
   useEffect(() => {
     getTodos();
@@ -22,11 +25,14 @@ export default function TodoList() {
 
   return (
     <div className={styles.todoList}>
-      {todos.todos.map((todo) => {
+      {todos?.todos?.map((todo) => {
         return <Todo key={todo.id} todo={todo} />;
       })}
       <div className={styles.pagination}>
-        <PaginationCOMP total={todos.total} countPerPage={countPerPage} />
+        <PaginationCOMP
+          total={todos ? todos.total : 0}
+          countPerPage={countPerPage}
+        />
       </div>
     </div>
   );
