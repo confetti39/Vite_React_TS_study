@@ -20,17 +20,25 @@ export default function DetailButtons({
 }: {
   todoId: string | undefined;
 }) {
+  // router
   const navigate = useNavigate();
-  const [isOpenInput, setOpenInput] = useState<boolean>(false);
 
+  // local
+  const [isOpenInput, setOpenInput] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
+
+  // axios
+  const { deleteData: handleDelete } = useAxiosDelete(
+    `https://dummyjson.com/todos/${todoId}`
+  );
+
+  //handler
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleEdit = (): void => {
     setOpenInput((prev) => !prev);
   };
-  const url = `https://dummyjson.com/todos/${todoId}`;
-  const { deleteData: handleDelete } = useAxiosDelete(url);
+
   return (
     <>
       <IconButton onClick={handleEdit} aria-label="delete" size="large">

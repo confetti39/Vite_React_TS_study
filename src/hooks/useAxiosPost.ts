@@ -1,6 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 
+/**
+ * axios post hook
+ * @param url
+ * @param initialData (optional)
+ * @returns sendData, data
+ */
 export default function useAxiosPost<TRequest, TResponse>(
   url: string,
   initialData: TResponse | null = null

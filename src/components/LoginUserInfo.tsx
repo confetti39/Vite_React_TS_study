@@ -6,8 +6,13 @@ import { useNavigate } from "react-router-dom";
 import styles from "./styles/LoginUserInfo.module.css";
 
 export default function LoginUserInfo() {
+  // router
   const navigate = useNavigate();
+
+  // local
   const [id, setId] = useRecoilState(userId);
+
+  // handler
   const handleLogOut = (): void => {
     localStorage.removeItem("id");
     setId("");

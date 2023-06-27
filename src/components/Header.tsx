@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function Header() {
   const navigate = useNavigate();
   const iconUrl = new URL("../assets/to-do.png", import.meta.url).href;
+
   return (
     <header className={styles.container}>
       <img

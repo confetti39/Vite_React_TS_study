@@ -15,9 +15,14 @@ import { userId, userPassword } from "../states/User";
 import Header from "../components/Header";
 
 export default function Login() {
+  // router
   const navigate = useNavigate();
+
+  // local
   const [id, setId] = useRecoilState(userId);
   const [password, setPassword] = useRecoilState(userPassword);
+
+  // handler
   const handleLogIn = () => {
     if (!(id && password)) return;
     navigate(`/home`);
