@@ -6,6 +6,7 @@ import { useRecoilState } from "recoil";
 import { singleTodo } from "../states/TodoData";
 import { useNavigate } from "react-router-dom";
 import useAxiosPost from "../hooks/useAxiosPost";
+import useAxiosPut from "../hooks/useAxiosPut";
 
 export default function TodoInput({
   type,
@@ -16,26 +17,28 @@ export default function TodoInput({
   todoId: string | undefined;
   setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+  // router
   const navigate = useNavigate();
+
+  // local
   const [text, setText] = useState<string>("");
-  const [todo, setTodo] = useRecoilState(singleTodo);
-  const postUrl = `https://dummyjson.com/todos/add`;
-  const putUrl = `https://dummyjson.com/todos/${todoId}`;
-  const { sendData: postTodo, data } = useAxiosPost(postUrl);
+
+  // axios
+  const { sendData: postTodo } = useAxiosPost(
+    `https://dummyjson.com/todos/add`
+  );
+  const { sendData: putTodo } = useAxiosPut(
+    `https://dummyjson.com/todos/${todoId}`
+  );
+
+  // handler
   const handleSubmit = (): void => {
     switch (type) {
       case "edit":
-        axios
-          .put(
-            putUrl,
-            {
-              todo: text,
-            },
-            { headers: { "Content-Type": "application/json" } }
-          )
-          .then((res) => setTodo(res.data))
-          .then(() => setEditMode(false));
-
+        putTodo({
+          todo: text,
+        });
+        setEditMode(false);
         break;
 
       case "add":
