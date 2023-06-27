@@ -13,6 +13,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import TodoInput from "./TodoInput";
+import useAxiosDelete from "../hooks/useAxiosDelete";
 
 export default function DetailButtons({
   todoId,
@@ -25,14 +26,11 @@ export default function DetailButtons({
   const [open, setOpen] = useState<boolean>(false);
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const handleDelete = (): void => {
-    axios.delete(`https://dummyjson.com/todos/${todoId}`);
-    navigate(`/home`);
-  };
   const handleEdit = (): void => {
     setOpenInput((prev) => !prev);
   };
+  const url = `https://dummyjson.com/todos/${todoId}`;
+  const { deleteData: handleDelete } = useAxiosDelete(url);
   return (
     <>
       <IconButton onClick={handleEdit} aria-label="delete" size="large">
@@ -62,6 +60,7 @@ export default function DetailButtons({
             onClick={() => {
               handleClose();
               handleDelete();
+              navigate(`/home`);
             }}
             autoFocus
           >
