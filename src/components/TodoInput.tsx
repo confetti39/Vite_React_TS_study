@@ -5,6 +5,7 @@ import axios from "axios";
 import { useRecoilState } from "recoil";
 import { singleTodo } from "../states/TodoData";
 import { useNavigate } from "react-router-dom";
+import useAxiosPost from "../hooks/useAxiosPost";
 
 export default function TodoInput({
   type,
@@ -18,12 +19,15 @@ export default function TodoInput({
   const navigate = useNavigate();
   const [text, setText] = useState<string>("");
   const [todo, setTodo] = useRecoilState(singleTodo);
+  const postUrl = `https://dummyjson.com/todos/add`;
+  const putUrl = `https://dummyjson.com/todos/${todoId}`;
+  const { sendData: postTodo, data } = useAxiosPost(postUrl);
   const handleSubmit = (): void => {
     switch (type) {
       case "edit":
         axios
           .put(
-            `https://dummyjson.com/todos/${todoId}`,
+            putUrl,
             {
               todo: text,
             },
@@ -35,19 +39,12 @@ export default function TodoInput({
         break;
 
       case "add":
-        axios
-          .post(
-            `https://dummyjson.com/todos/add`,
-            {
-              todo: text,
-              completed: false,
-              userId: 5,
-            },
-            {
-              headers: { "Content-Type": "application/json" },
-            }
-          )
-          .then(() => navigate(`/`));
+        postTodo({
+          todo: text,
+          completed: false,
+          userId: 5,
+        });
+        navigate(`/`);
         break;
     }
   };
